@@ -4,6 +4,7 @@ Created on Thu Mar  5 16:51:29 2020
 
 @author: kora
 """
+#Implementation of a Graph using an Adjacency List
 from Vertex import Vertex
 class Graph:
     
@@ -38,3 +39,4 @@ class Graph:
     
     def __contains__(self,n):
         return n in self.vertList
+g = Graph()

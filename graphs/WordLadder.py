@@ -4,21 +4,31 @@ Created on Wed Mar  4 14:38:18 2020
 
 @author: kora
 """
+from Stack import Stack
+from Queue import Queue
+from Graph import Graph
 
-class Vertex:
-    def __init__(self,key):
-        self.id = key
-        self.connectedTo = {}
-    def addNeighbor(self,nbr,weight = 0):
-        self.connectedTo[nbr] = weight
-    def getConnections(self):
-        self.connectedTo.keys()
-    def getId(self):
-        return self.id
-    def getWeight(self,nbr):
-        return self.connectedTo[nbr]
-    def __str__(self):
-        
-        return str(self.id) + ' connected to: ' + str([x.id for x in self.connectedTo])
-
+def buildGraph(wordFile):
+    d = {}
+    g = Graph()
+    
+    wfile = open(wordFile,'r')
+    
+    for line in wfile:
+        print(line)
+        word = line[:-1]
+        print(word)
+        for i in range(len(word)):
+            bucket = word[:i] + '_' + word[i+1:]
+            if bucket in d:
+                d[bucket].append(word)
+            else:
+                d[bucket] = [word]
+                
+    for bucket in d.keys():
+        for word1 in d[bucket]:
+            for word2 in d[bucket]:
+                if word1 != word2:
+                    g.addEdge(word1,word2)
+    return g
     
